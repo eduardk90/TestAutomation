@@ -10,8 +10,8 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('Successful login with credentials', async ({ page }) => {
-    await loginPage.typeUsername('standard_user')
-    await loginPage.typePassword('secret_sauce')
+    await loginPage.typeUsername(process.env.USERNAME)
+    await loginPage.typePassword(process.env.PASSWORD)
     await loginPage.clickLoginButton()
     await loginPage.verifySuccessfulLogin()
 });
