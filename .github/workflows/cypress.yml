@@ -23,9 +23,9 @@ jobs:
       - name: Run Cypress tests
         run: npx cypress run
         env:
-          LOGIN_PAGE: ${{ secrets.LOGIN_PAGE }}
-          SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
-          SAUCE_PASSWORD: ${{ secrets.SAUCE_PASSWORD }}
+          LOGIN_PAGE: ${{ vars.LOGIN_PAGE }}
+          SAUCE_USERNAME: ${{ vars.SAUCE_USERNAME }}
+          SAUCE_PASSWORD: ${{ vars.SAUCE_PASSWORD }}
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
