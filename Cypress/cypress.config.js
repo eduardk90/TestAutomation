@@ -4,6 +4,7 @@ module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
       config.env.LOGIN_PAGE = process.env.LOGIN_PAGE
+      config.env.ALL_PRODUCTS_PAGE = process.env.ALL_PRODUCTS_PAGE
       config.env.SAUCE_USERNAME = process.env.SAUCE_USERNAME
       config.env.SAUCE_PASSWORD = process.env.SAUCE_PASSWORD
       return config
