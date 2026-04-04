@@ -1,13 +1,43 @@
-name: Cypress Tests
+name: Tests
 on:
   push:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
 jobs:
-  test:
+  playwright:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    environment: test
+    defaults:
+      run:
+        working-directory: Playwright
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      - name: Run Playwright tests
+        run: npx playwright test
+        env:
+          LOGIN_PAGE: ${{ vars.LOGIN_PAGE }}
+          USERNAME: ${{ vars.USERNAME }}
+          PASSWORD: ${{ vars.PASSWORD }}
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: Playwright/playwright-report/
+          retention-days: 30
+
+  cypress:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    environment: test
     defaults:
       run:
         working-directory: Cypress
