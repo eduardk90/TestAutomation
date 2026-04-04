@@ -10,7 +10,7 @@ export default class LoginPage {
     cy.get('[data-test="password"]').clear().type(password)
   }
   clickLoginButton() {
-  cy.get('[data-test="login-button"]').click()
+    cy.get('[data-test="login-button"]').click()
   }
   verifySuccessfulLogin() {
     cy.url().should('eq', Cypress.env('LOGIN_PAGE') + '/inventory.html')
